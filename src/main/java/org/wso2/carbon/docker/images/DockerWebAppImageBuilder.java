@@ -46,12 +46,12 @@ public class DockerWebAppImageBuilder implements IDockerWebAppImageBuilder {
         }
     }
 
-    public void buildImage(String creator, String imageName, String imageVersion, Path warFilePath) throws
+    public void buildImage(String creator, String imageName, String imageVersion, Path artifactPath) throws
             DockerImageBuilderException {
         String dockerImageName = generateImageIdentifier(creator, imageName, imageVersion);
         try {
-            setupEnvironment(warFilePath);
-            dockerClient.build(warFilePath.getParent(), dockerImageName);
+            setupEnvironment(artifactPath);
+            dockerClient.build(artifactPath.getParent(), dockerImageName);
         } catch (Exception e) {
             String message = String.format("Could not create the docker image[image-identifier]: "
                     + "%s", dockerImageName);

@@ -20,8 +20,25 @@ import org.wso2.carbon.docker.images.exceptions.DockerImageBuilderException;
 import java.nio.file.Path;
 
 public interface IDockerWebAppImageBuilder {
-    void buildImage(String creator, String imageName, String imageVersion, Path warFilePath) throws
+
+    /**
+     * builds up a Docker image which deploys the specified artifact
+     * @param creator           the name of the deployer
+     * @param imageName         the Docker image identifier
+     * @param imageVersion      the Docker image version
+     * @param artifactPath      the artifact to be deployed
+     * @throws DockerImageBuilderException
+     */
+    void buildImage(String creator, String imageName, String imageVersion, Path artifactPath) throws
             DockerImageBuilderException;
+
+    /**
+     * deletes the specified Docker image
+     * @param creator           the name of the deployer
+     * @param imageName         the Docker image identifier
+     * @param imageVersion      the Docker image version
+     * @throws DockerImageBuilderException
+     */
     void removeImages(String creator, String imageName, String imageVersion) throws
             DockerImageBuilderException;
 }
